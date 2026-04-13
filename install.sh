@@ -8,8 +8,8 @@ if ! command -v python3 &> /dev/null; then
 fi
 
 # Copy script to /usr/local/bin and make it executable
-sudo cp zenitpolar.py /usr/local/bin/zenitpolar
-sudo chmod +x /usr/local/bin/zenitpolar
+sudo cp zenitpy.py /usr/local/bin/zenitpy
+sudo chmod +x /usr/local/bin/zenitpy
 
 echo "[OK] zenitpolar installed successfully."
 echo "     Run: zenitpolar --help"
