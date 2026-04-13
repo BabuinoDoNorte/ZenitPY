@@ -1,5 +1,5 @@
 #!/bin/bash
-# zenitpolar installer
+# ZenitPY installer
 
 # Check Python 3
 if ! command -v python3 &> /dev/null; then
@@ -11,5 +11,5 @@ fi
 sudo cp zenitpy.py /usr/local/bin/zenitpy
 sudo chmod +x /usr/local/bin/zenitpy
 
-echo "[OK] zenitpolar installed successfully."
-echo "     Run: zenitpolar --help"
+echo "[OK] ZenitPY installed successfully."
+echo "     Run: zenitpy --help"
