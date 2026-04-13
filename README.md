@@ -37,8 +37,8 @@ Default substitution table:
 Letters not listed in the table pass through unchanged. The original casing is always preserved in the output.
 
 **Example:**
-TENIS  →  ROTAS
-ROTAS  →  TENIS
+TENIS  →  ROLAS
+ROLAS  →  TENIS
 
 ---
 
@@ -104,7 +104,7 @@ Each pair defines a bidirectional swap. Key rules:
 ## Advanced examples
 
 ```bash
-zenitpolar --text "TENIS"               # → ROTAS
+zenitpolar --text "TENIS"               # → ROLAS
 zenitpolar --text "ROTAS"               # → TENIS
 echo "Secret" | zenitpolar              # via pipe
 cat input.txt | zenitpolar > out.txt    # process file
