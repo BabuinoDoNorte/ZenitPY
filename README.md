@@ -1,7 +1,8 @@
 # zenitpolar
-╔══════════════════════════════════════╗
-║  ZENIT POLAR — Substitution Cipher   ║
-╚══════════════════════════════════════╝
+
+> `╔══════════════════════════════════════╗`  
+> `║  ZENIT POLAR — Substitution Cipher   ║`  
+> `╚══════════════════════════════════════╝`
 
 A minimalist Linux CLI tool for substitution-based encryption.  
 Runs entirely in memory. **ZERO LOGS** — no data is ever written to disk.
