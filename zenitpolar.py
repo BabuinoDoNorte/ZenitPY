@@ -1,21 +1,5 @@
-#!/usr/bin/env python3
-# =============================================================================
-# zenitpolar — Ferramenta CLI de criptografia por substituição
-# Algoritmo: ZENIT POLAR (ou chave customizada)
-# Autor: gerado via Claude / Anthropic
-# Licença: MIT
-#
-# ZERO LOGS: nenhum arquivo é escrito em disco. Toda operação ocorre
-# exclusivamente na memória. A saída vai somente para stdout.
-# =============================================================================
-
 import sys
 import argparse
-
-
-# -----------------------------------------------------------------------------
-# Construção da tabela de tradução (simetria garantida)
-# -----------------------------------------------------------------------------
 
 def build_translation_table(key_string: str) -> dict:
     """
@@ -35,7 +19,6 @@ def build_translation_table(key_string: str) -> dict:
     retorna o texto original.
     """
     table = {}
-    # Remove espaços acidentais e divide pelos pares
     parts = [p.strip() for p in key_string.upper().split("-")]
 
     for part in parts:
@@ -52,9 +35,7 @@ def build_translation_table(key_string: str) -> dict:
                 "Apenas letras são permitidas na chave."
             )
         if a == b:
-            # Par idêntico não causa erro, apenas não faz nada
             continue
-        # Bidirecional: a→b e b→a (ambos em uppercase como índice base)
         table[a] = b
         table[b] = a
 
@@ -67,11 +48,6 @@ def build_default_table() -> dict:
       Z↔P  E↔O  N↔L  I↔A  T↔R
     """
     return build_translation_table("ZP-EO-NL-IA-TR")
-
-
-# -----------------------------------------------------------------------------
-# Aplicação da cifra
-# -----------------------------------------------------------------------------
 
 def apply_cipher(text: str, table: dict) -> str:
     """
@@ -91,7 +67,6 @@ def apply_cipher(text: str, table: dict) -> str:
         upper = char.upper()
         if upper in table:
             substituto = table[upper]
-            # Preserva o case: se o original era minúsculo, retorna minúsculo
             if char.islower():
                 result.append(substituto.lower())
             else:
@@ -99,11 +74,6 @@ def apply_cipher(text: str, table: dict) -> str:
         else:
             result.append(char)
     return "".join(result)
-
-
-# -----------------------------------------------------------------------------
-# Interface de linha de comando
-# -----------------------------------------------------------------------------
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -160,11 +130,6 @@ def parse_args():
 
     return parser.parse_args()
 
-
-# -----------------------------------------------------------------------------
-# Exibição da tabela (modo --show-table)
-# -----------------------------------------------------------------------------
-
 def display_table(table: dict, key_name: str):
     """Imprime a tabela de substituição de forma legível no stdout."""
     print(f"\nTabela de substituição ativa: {key_name}")
@@ -178,52 +143,34 @@ def display_table(table: dict, key_name: str):
     print("─" * 30)
     print("Letras não listadas permanecem inalteradas.\n")
 
-
-# -----------------------------------------------------------------------------
-# Ponto de entrada principal
-# -----------------------------------------------------------------------------
-
 def main():
     args = parse_args()
 
-    # --- Constrói a tabela de tradução ---
     if args.key:
         try:
             table = build_translation_table(args.key)
             key_name = f"customizada ({args.key.upper()})"
         except ValueError as e:
-            # Erros de chave vão para stderr para não poluir stdout
             print(f"[ERRO] {e}", file=sys.stderr)
             sys.exit(1)
     else:
         table = build_default_table()
         key_name = "ZENIT POLAR (padrão)"
-
-    # --- Modo informativo: exibe tabela e sai ---
     if args.show_table:
         display_table(table, key_name)
         sys.exit(0)
-
-    # --- Determina a fonte do texto ---
     if args.text is not None:
-        # Texto fornecido diretamente via --text / -t
         text = args.text
     elif not sys.stdin.isatty():
-        # Texto chegando via pipe / stdin (ex: echo "..." | zenitpolar)
-        # Lê tudo de uma vez; strip() remove newline final do echo
         text = sys.stdin.read().rstrip("\n")
     else:
-        # Nenhuma fonte de texto: exibe ajuda resumida e sai com erro
         print(
             "[ERRO] Forneça o texto via --text 'TEXTO' ou via stdin (pipe).\n"
             "       Use --help para ver exemplos de uso.",
             file=sys.stderr,
         )
         sys.exit(1)
-
-    # --- Aplica a cifra e envia resultado para stdout ---
     resultado = apply_cipher(text, table)
-    # print() adiciona \n ao final — comportamento padrão de ferramentas Unix
     print(resultado)
 
 
