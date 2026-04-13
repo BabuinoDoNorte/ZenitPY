@@ -104,11 +104,11 @@ Each pair defines a bidirectional swap. Key rules:
 ## Advanced examples
 
 ```bash
-zenitpolar --text "TENIS"               # → ROLAS
-zenitpolar --text "ROTAS"               # → TENIS
+zenitpolar --text "MACACO"               # → MICICE
+zenitpolar --text "MICICE"               # → MACACO
 echo "Secret" | zenitpolar              # via pipe
 cat input.txt | zenitpolar > out.txt    # process file
-zenitpolar --text "TENIS" | zenitpolar  # → TENIS (double apply)
+zenitpolar --text "MACACO" | zenitpolar  # → MACACO (double apply)
 zenitpolar --show-table                 # view default table
 zenitpolar --key "AB-CD-EF" --show-table
 ```
