@@ -5,7 +5,7 @@
 > `╚══════════════════════════════════════╝`
 
 A minimalist Linux CLI tool for substitution-based encryption.  
-Runs entirely in memory. **ZERO LOGS** — no data is ever written to disk.
+Runs entirely in memory. **AVOIDS LOGS** — designed to minimize data written to disk.
 
 ---
 
@@ -118,13 +118,15 @@ zenitpolar --key "AB-CD-EF" --show-table
 
 ## Security & privacy
 
-| Property            | Detail                                                        |
-|---------------------|---------------------------------------------------------------|
-| **ZERO LOGS**       | No file is created or modified on disk during execution.      |
-| **Memory only**     | All processing occurs in local-scope variables in RAM.        |
-| **Clean stdout**    | Results to `stdout`, errors to `stderr`.                      |
-| **No network**      | No network connections are made.                              |
-| **No dependencies** | Python 3 standard library only (`sys`, `argparse`).           |
+| Property            | Detail                                                                        |
+|---------------------|-------------------------------------------------------------------------------|
+| **Avoids logs**     | Designed to minimize file creation or modification on disk during execution.  |
+| **Memory only**     | All processing occurs in local-scope variables in RAM.                        |
+| **Clean stdout**    | Results to `stdout`, errors to `stderr`.                                      |
+| **No network**      | No network connections are made.                                              |
+| **No dependencies** | Python 3 standard library only (`sys`, `argparse`).                           |
+
+> **Recommended:** For maximum privacy, run this tool on a disposable machine or via live boot (e.g. Tails, Ubuntu Live USB) to avoid leaving traces in system logs or shell history.
 
 > **Notice:** ZENIT POLAR is a substitution cipher suitable for basic obfuscation. Do not use as the sole mechanism in environments requiring strong cryptography.
 
